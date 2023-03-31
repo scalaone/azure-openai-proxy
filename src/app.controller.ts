@@ -1,15 +1,26 @@
-import { Controller, Get, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Header, HttpStatus, Post, Req, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
 
-@Controller('chat')
+@Controller()
 export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get('models')
+  models() {
+    return this.appService.getModels();
+  }
+}
+
+@Controller('chat')
+export class ChatController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
     return this.appService.getHello();
   }
+
   @Post('completions')
   completions(@Req() request: Request, @Res() res: Response) {
     let auth = request.headers['authorization'];

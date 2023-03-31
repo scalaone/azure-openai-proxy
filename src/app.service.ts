@@ -1,13 +1,20 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
-import { firstValueFrom } from 'rxjs';
+import { Header, Injectable } from '@nestjs/common';
+import { models } from './models';
 
 @Injectable()
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
+
+  @Header('Content-Type', 'application/json')
+  getModels() {
+    return models;
+  }
+
   getHello(): string {
     return 'Hello World!';
   }
+
   getCompletions(
     endpoint: string,
     deployment_id: string,
