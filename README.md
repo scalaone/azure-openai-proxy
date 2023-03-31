@@ -71,7 +71,7 @@ Roadmap
 
 Authors
 
-• John Doe (@johndoe)
+• Hai Chang (@haha1903)
 
 Acknowledgements
 
