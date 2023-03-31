@@ -8,7 +8,7 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
-  async getCompletions(
+  getCompletions(
     endpoint: string,
     deployment_id: string,
     azureApiKey: string,
@@ -20,6 +20,6 @@ export class AppService {
       'Content-Type': 'application/json',
     };
     let ret = this.httpService.post(url, body, { headers: headers });
-    return await firstValueFrom(ret);
+    return ret;
   }
 }

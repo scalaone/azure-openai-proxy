@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
-import { CompletionsResp } from './app.model';
 
 @Controller('chat')
 export class AppController {
@@ -11,12 +11,19 @@ export class AppController {
     return this.appService.getHello();
   }
   @Post('completions')
-  async completions(@Req() request: Request) {
+  completions(@Req() request: Request, @Res() res: Response) {
     let auth = request.headers['authorization'];
     let apiKey = auth.replace('Bearer ', '');
     let [resource_id, deployment_id, azureApiKey] = apiKey.split(':');
     let endpoint = `https://${resource_id}.openai.azure.com`;
-    let resp = await this.appService.getCompletions(endpoint, deployment_id, azureApiKey, request.body);
-    return resp.data;
+    res.header('Content-Type', 'text/event-stream');
+    res.header('Transfer-Encoding', 'chunked');
+    this.appService
+      .getCompletions(endpoint, deployment_id, azureApiKey, request.body)
+      .subscribe({
+        next: (data) => {
+          res.status(HttpStatus.OK).send(data.data);
+        },
+      });
   }
 }
