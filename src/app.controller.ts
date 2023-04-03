@@ -1,10 +1,11 @@
 import { Controller, Get, Header, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { AxiosHeaders } from 'axios';
 import { Response } from 'express';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get('models')
   models() {
@@ -14,7 +15,7 @@ export class AppController {
 
 @Controller('chat')
 export class ChatController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(): string {
@@ -27,19 +28,24 @@ export class ChatController {
     const apiKey = auth.replace('Bearer ', '');
     const [resource_id, deployment_id, azureApiKey] = apiKey.split(':');
     const endpoint = `https://${resource_id}.openai.azure.com`;
-    const response = await this.appService
-      .getCompletions(endpoint, deployment_id, azureApiKey, request.body);
-    const stream = response.data;
-    res.header('Content-Type', stream.headers['content-type']);
-    res.header('Transfer-Encoding', stream.headers['transfer-encoding']);
-    res.statusCode = stream.statusCode;
-    stream.on('data', data => {
-      // console.log('date : ', new Date().toISOString());
-      // console.log('data : ', data.toString());
-      res.write(data);
-    });
-    stream.on('end', () => {
-      res.end();
-    });
+    const stream = request.body['stream'];
+    const response = await this.appService.getCompletions(endpoint, deployment_id, azureApiKey, request.body, stream);
+
+    // set response headers
+    for (const [key, value] of response.headers as AxiosHeaders) {
+      res.header[key] = value;
+    }
+    res.status(response.status);
+    if(stream) { 
+      const streamData = response.data;
+      streamData.on('data', data => {
+        res.write(data);
+      });
+      streamData.on('end', () => {
+        res.end();
+      });
+    } else {
+      res.send(response.data);
+    }
   }
 }

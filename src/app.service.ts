@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Header, Injectable } from '@nestjs/common';
 import { models } from './models';
-import axios from 'axios';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -21,6 +21,7 @@ export class AppService {
     deployment_id: string,
     azureApiKey: string,
     body: any,
+    stream: boolean,
   ) {
     let url = `${endpoint}/openai/deployments/${deployment_id}/chat/completions?api-version=2023-03-15-preview`;
     let headers = {
@@ -28,9 +29,10 @@ export class AppService {
       'Content-Type': 'application/json',
     };
     const config = { headers: headers };
-    if (body['stream']) {
+    if (stream) {
       config['responseType'] = 'stream';
     }
-    return await axios.post(url, body, config);
+    let ret = this.httpService.post(url, body, config);
+    return await firstValueFrom(ret);
   }
 }
