@@ -22,19 +22,24 @@ export class ChatController {
   }
 
   @Post('completions')
-  completions(@Req() request: Request, @Res() res: Response) {
-    let auth = request.headers['authorization'];
-    let apiKey = auth.replace('Bearer ', '');
-    let [resource_id, deployment_id, azureApiKey] = apiKey.split(':');
-    let endpoint = `https://${resource_id}.openai.azure.com`;
-    res.header('Content-Type', 'text/event-stream');
-    res.header('Transfer-Encoding', 'chunked');
-    this.appService
-      .getCompletions(endpoint, deployment_id, azureApiKey, request.body)
-      .subscribe({
-        next: (data) => {
-          res.status(HttpStatus.OK).send(data.data);
-        },
-      });
+  async completions(@Req() request: Request, @Res() res: Response) {
+    const auth = request.headers['authorization'];
+    const apiKey = auth.replace('Bearer ', '');
+    const [resource_id, deployment_id, azureApiKey] = apiKey.split(':');
+    const endpoint = `https://${resource_id}.openai.azure.com`;
+    const response = await this.appService
+      .getCompletions(endpoint, deployment_id, azureApiKey, request.body);
+    const stream = response.data;
+    res.header('Content-Type', stream.headers['content-type']);
+    res.header('Transfer-Encoding', stream.headers['transfer-encoding']);
+    res.statusCode = stream.statusCode;
+    stream.on('data', data => {
+      // console.log('date : ', new Date().toISOString());
+      // console.log('data : ', data.toString());
+      res.write(data);
+    });
+    stream.on('end', () => {
+      res.end();
+    });
   }
 }

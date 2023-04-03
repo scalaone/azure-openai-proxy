@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Header, Injectable } from '@nestjs/common';
 import { models } from './models';
+import axios from 'axios';
 
 @Injectable()
 export class AppService {
@@ -12,10 +13,10 @@ export class AppService {
   }
 
   getHello(): string {
-    return 'Hello World!';
+    return 'Hello World! 1.4';
   }
 
-  getCompletions(
+  async getCompletions(
     endpoint: string,
     deployment_id: string,
     azureApiKey: string,
@@ -26,7 +27,10 @@ export class AppService {
       'api-key': azureApiKey,
       'Content-Type': 'application/json',
     };
-    let ret = this.httpService.post(url, body, { headers: headers });
-    return ret;
+    const config = { headers: headers };
+    if (body['stream']) {
+      config['responseType'] = 'stream';
+    }
+    return await axios.post(url, body, config);
   }
 }
