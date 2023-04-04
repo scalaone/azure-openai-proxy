@@ -1,6 +1,6 @@
-import { Controller, Get, Header, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { AxiosHeaders } from 'axios';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { AppService } from './app.service';
 
 @Controller()
@@ -49,3 +49,4 @@ export class ChatController {
     }
   }
 }
+
