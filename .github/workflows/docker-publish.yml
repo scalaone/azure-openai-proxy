@@ -26,7 +26,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_NAME }}:${{ github.ref }}
+          tags: ${{ env.IMAGE_NAME }}:1.${{ github.run_number }}
           build-args: |
             VERSION=${{ github.ref }}
         env:
