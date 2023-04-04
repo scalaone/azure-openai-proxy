@@ -13,7 +13,7 @@ export class AppService {
   }
 
   getHello(): string {
-    return 'Hello World! 1.7';
+    return 'Hello World! 1.8';
   }
 
   async getCompletions(
