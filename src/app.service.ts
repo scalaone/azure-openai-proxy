@@ -23,8 +23,8 @@ export class AppService {
     body: any,
     stream: boolean,
   ) {
-    let url = `${endpoint}/openai/deployments/${deployment_id}/chat/completions?api-version=2023-03-15-preview`;
-    let headers = {
+    const url = `${endpoint}/openai/deployments/${deployment_id}/chat/completions?api-version=2023-03-15-preview`;
+    const headers = {
       'api-key': azureApiKey,
       'Content-Type': 'application/json',
     };
@@ -32,7 +32,7 @@ export class AppService {
     if (stream) {
       config['responseType'] = 'stream';
     }
-    let ret = this.httpService.post(url, body, config);
+    const ret = this.httpService.post(url, body, config);
     return await firstValueFrom(ret);
   }
 }

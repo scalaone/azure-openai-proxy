@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get('models')
   models() {
@@ -15,7 +15,7 @@ export class AppController {
 
 @Controller('chat')
 export class ChatController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -29,16 +29,22 @@ export class ChatController {
     const [resource_id, deployment_id, azureApiKey] = apiKey.split(':');
     const endpoint = `https://${resource_id}.openai.azure.com`;
     const stream = request.body['stream'];
-    const response = await this.appService.getCompletions(endpoint, deployment_id, azureApiKey, request.body, stream);
+    const response = await this.appService.getCompletions(
+      endpoint,
+      deployment_id,
+      azureApiKey,
+      request.body,
+      stream,
+    );
 
     // set response headers
     for (const [key, value] of response.headers as AxiosHeaders) {
       res.header[key] = value;
     }
     res.status(response.status);
-    if(stream) { 
+    if (stream) {
       const streamData = response.data;
-      streamData.on('data', data => {
+      streamData.on('data', (data) => {
         res.write(data);
       });
       streamData.on('end', () => {
@@ -49,4 +55,3 @@ export class ChatController {
     }
   }
 }
-
