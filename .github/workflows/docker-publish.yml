@@ -10,7 +10,7 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  IMAGE_NAME: haha1903/azure-openai-proxy
+  IMAGE_NAME: scalaone/azure-openai-proxy
 
 jobs:
   build-and-push-image:
@@ -28,9 +28,7 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_NAME }}:1.${{ github.run_number }}
           build-args: |
-            VERSION=${{ github.ref }}
+            VERSION=1.${{ github.run_number }}
         env:
           DOCKER_USERNAME: ${{ env.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ env.DOCKER_PASSWORD }}
-      - name: Echo the Docker Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
