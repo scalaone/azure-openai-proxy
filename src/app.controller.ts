@@ -19,7 +19,7 @@ export class ChatController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return this.appService.getVersion();
   }
 
   @Post('completions')
