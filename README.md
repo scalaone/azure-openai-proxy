@@ -1,88 +1,91 @@
-Azure OpenAI Proxy
+# Azure-OpenAI-Proxy
 
-A Node.js API proxy that connects to the OpenAI API using your Azure credentials. This proxy is useful when working with OpenAI as it allows you to keep your API key secure and manage authentication from a centralized location.
+Azure-OpenAI-Proxy is an application that serves as a proxy for OpenAI's API. It enables users to request AI-generated text completions for specific prompts, using different models and parameters. The proxy supports GPT-4 models in addition to other available models. It simplifies the interaction with the OpenAI API and helps manage multiple deployments with ease for your AI-based text generation applications.
 
-Features
+## Installation
 
-• Connects to the OpenAI GPT-3 API using your Azure credentials
-• Handles access token refresh and error retries
-• Works as a local HTTP proxy that forwards requests to OpenAI
+Follow these steps to set up Azure-OpenAI-Proxy:
 
-Installation
+1. Clone the repository:
 
-To install and use this package, you must have Node.js and npm installed on your machine.
-
-1. Clone this repository to your local machine
-2. Navigate to the project’s root directory
-3. Run the following command to install the required dependencies:
-
-npm install
-
-Usage
-
-Before running this application, you must [create an Azure Active Directory application](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and [configure it to access the OpenAI API](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps).
-
-Once you have your Azure credentials, you can start the proxy server using the following command:
-
-npm start
-
-This starts the proxy server on localhost:3000. You can now send requests to the OpenAI API using the proxy server.
-
-// Send a GPT-3 request using the OpenAI API
 ```
-curl -X "POST" "http://localhost:3000/v1/chat/completions" \
-     -H 'Authorization: Bearer ${resource_id}:${deployment_id}:{azure_openai_apikey}' \
+git clone https://github.com/scalaone/azure-openai-proxy.git
+```
+
+2. Navigate to the project directory:
+
+```
+cd azure-openai-proxy
+```
+
+3. Install the required dependencies:
+
+```
+npm install
+```
+
+4. Replace the placeholder values in the example request as mentioned in the [Usage section](#usage) with your actual resource ID, deployment IDs, model names, and API key.
+
+5. Run the application:
+
+```
+npm run start
+```
+
+The Azure-OpenAI-Proxy will be running on your server and listening for incoming requests.
+
+## Usage
+
+To send a request, use a `curl` command to POST the input data to the application's URL. Replace the placeholder values with your actual resource ID, deployment IDs, model names, and API key.
+
+Example request:
+
+```
+curl -X "POST" "https://openaiproxy2.azurewebsites.net/v1/chat/completions" \
+     -H 'Authorization: Bearer YOUR_RESOURCE_ID:YOUR_MODEL_NAME_IDENTIFIERS:YOUR_API_KEY' \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
-  "model": "gpt-3.5-turbo",
-  "temperature": 1,
   "messages": [
     {
-      "content": "Please edit my sentences",
-      "role": "system"
-    },
-    {
-      "content": "spends time with my family",
-      "role": "user"
-    },
-    {
-      "content": "I spend time with my family.",
-      "role": "assistant"
-    },
-    {
-      "content": "spends time with my family",
+      "content": "hi",
       "role": "user"
     }
-  ]
+  ],
+  "temperature": 1,
+  "model": "gpt-3.5-turbo",
+  "stream": false
 }'
 ```
 
-Note that you can replace davinci with other OpenAI models that you have access to.
+Replace the following placeholder values:
 
-API Documentation
+- `YOUR_RESOURCE_ID` with the actual resource ID (e.g., `hai`).
+- `YOUR_MODEL_NAME_IDENTIFIERS` with the actual model and deployment ID mappings (e.g., `gpt-3.5-turbo|gpt-35-turbo,gpt-4|gpt-4,gpt-4-32k|gpt-4-32k`).
+- `YOUR_API_KEY` with your actual API key (e.g., `xxxxxx`).
 
-The API documentation can be found in the docs folder in the project’s root directory.
+## Parameters
 
-Roadmap
+The request body contains the following parameters:
 
-• Add authentication with client secret instead of client credentials
-• Add support for other OpenAI APIs
-• Add caching to improve performance
+- `messages`: An array of message objects containing `content` and `role` properties. The `content` represents the text input, and the `role` can be one of the following options: `'system'`, `'user'`, or `'assistant'`.
+- `temperature`: Controls the randomness of generated completions. Higher values (e.g., 1) result in more random responses, while lower values (e.g., 0.1) produce more focused and deterministic responses.
+- `model`: Specifies the AI model to be used for generating completions. In the example, it is set to `'gpt-3.5-turbo'`.
+- `stream`: A boolean value indicating whether the response should be streamed.
 
-Authors
+## License
 
-• Hai Chang (@haha1903)
+This project is licensed under the MIT License. See the [LICENSE](https://choosealicense.com/licenses/mit/) file for details.
 
-Acknowledgements
+## Contributing
 
-• This project was inspired by the [Azure OpenAI API Proxy](https://github.com/haha1903/azure-openai-proxy).
+Contributions to Azure-OpenAI-Proxy are greatly appreciated. To contribute, follow these steps:
 
-Contributing
+1. Fork the repository and create your branch.
+2. Make changes or additions to the code.
+3. Commit your changes and raise a Pull Request.
 
-Contributions are always welcome! For major changes, please open an issue first to discuss what you would like to change.
+Please make sure to follow the project's coding standards and update documentation accordingly.
 
-Please make sure to update tests as appropriate.
+For further information, check the [OpenAI API documentation](https://platform.openai.com/docs/api-reference/completions/create).
 
-License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+Thank you for your interest in contributing to Azure-OpenAI-Proxy. Your efforts will help improve the project and benefit the community.
