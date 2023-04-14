@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  gptlite:
+    image: blrchen/gptlite:main
+    ports:
+      - 3000:3000
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_BASE_URL: http://azure-openai:3000
+    depends_on:
+      - azure-openai
+    networks:
+      - network
+
+  azure-openai:
+    build:
+      context: .
+    networks:
+      - network
+    restart: unless-stopped
+
+networks:
+  network:
+    driver: bridge
