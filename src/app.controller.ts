@@ -37,6 +37,12 @@ export class ChatController {
       stream,
     );
 
+    if (response.status > 299 || response.status < 200) {
+      res.status(response.status);
+      res.send(response.data);
+      return;
+    }
+
     // set response headers
     for (const [key, value] of response.headers as AxiosHeaders) {
       res.header[key] = value;

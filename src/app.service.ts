@@ -36,7 +36,11 @@ export class AppService {
       config['responseType'] = 'stream';
     }
     const ret = this.httpService.post(url, body, config);
-    return await firstValueFrom(ret);
+    try {
+      return await firstValueFrom(ret);
+    } catch (e) {
+      return e.response;
+    }
   }
   private getDeploymentId(mapping: string, model: string): string {
     this.logger.debug(`mapping: ${mapping}, model: ${model}`);
