@@ -42,7 +42,7 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 ## 本地运行和测试，使用WebChat测试streaming
 
 1. 克隆代码到命令行窗口
-2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量，YOUR_RESOURCE_ID:gpt-35-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY
+2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量为`YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
 3. 执行构建：运行 `docker-compose build`
 4. 启动服务：运行 `docker-compose up -d`
 5. 运行`http://localhost:3000`
