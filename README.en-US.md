@@ -42,7 +42,7 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 ## Local Running and Testing, Using WebChat for Streaming Test
 
 1. Clone code in command line window
-2. Update environment variable of OPENAPI_API_KEY on line nine of docker-compose.yml file with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
+2. Update environment variable of OPENAPI_API_KEY on line nine of `docker-compose.yml` file with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
 3. Execute build: `run docker-compose build`
 4. Start service: `run docker-compose up -d`
 5. Launch `http://localhost:3000`
