@@ -42,22 +42,22 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 ## Local Running and Testing, Using WebChat for Streaming Test
 
 1. Clone code in command line window
-2. Update environment variable of OPENAPI_API_KEY on line nine of docker-compose.yml file with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
-3. Execute build：run docker-compose build
-4. Start service：run docker-compose up -d
+2. Update environment variable of OPENAPI_API_KEY on line nine of `docker-compose.yml` file with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
+3. Execute build: `run docker-compose build`
+4. Start service: `run docker-compose up -d`
 5. Launch `http://localhost:3000`
 
 Frequently Asked Questions
 
-Q：What is `YOUR_RESOURCE_ID`,`YOUR_MODEL_DEPLOYMENT`,`YOUR_API_KEY`?
+Q: What is `YOUR_RESOURCE_ID`,`YOUR_MODEL_DEPLOYMENT`,`YOUR_API_KEY`?
 
-A：It can be found in azure management portal，see image below for details：
+A: It can be found in azure management portal, see image below for details:
 
 ![resource-and-model](./resource-and-model.jpg)
 
-Q：How do I support GPT-4？
+Q: How do I support GPT-4？
 
-A ：To use GPT-4 , please use key format as follows:
+A: To use GPT-4, please use key format as follows:
 
 `YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
 

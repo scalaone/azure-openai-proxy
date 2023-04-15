@@ -42,14 +42,14 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 ## 本地运行和测试，使用WebChat测试streaming
 
 1. 克隆代码到命令行窗口
-2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量为`YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
+2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量，YOUR_RESOURCE_ID:gpt-35-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY
 3. 执行构建：运行 `docker-compose build`
 4. 启动服务：运行 `docker-compose up -d`
 5. 运行`http://localhost:3000`
 
 常见问题
 
-Q：什么是`YOUR_RESOURCE_ID`,`YOUR_MODEL_DEPLOYMENT`,`YOUR_API_KEY`
+Q：什么是`YOUR_RESOURCE_ID`，`YOUR_MODEL_DEPLOYMENT`，`YOUR_API_KEY`
 
 A: 可以在Azure的管理门户里查找，具体见下图标注
 
@@ -57,7 +57,7 @@ A: 可以在Azure的管理门户里查找，具体见下图标注
 
 Q: 如何支持GPT-4
 
-A: 要使用GPT-4, 请使用下列格式的key: 
+A: 要使用GPT-4，请使用下列格式的key: 
 
 `YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
 
