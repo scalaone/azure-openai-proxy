@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "webAppName": {
+        "type": "string",
+        "defaultValue": "[concat('webApp-', uniqueString(resourceGroup().id))]",
+        "metadata": {
+          "description": "Name for the Web App"
+        }
+      },
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      }
+    },
+    "variables": {
+      "serverFarmName": "[concat('serverFarm-', uniqueString(resourceGroup().id))]",
+      "dockerImageName": "scalaone/azure-openai-proxy"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Web/serverfarms",
+        "apiVersion": "2020-06-01",
+        "name": "[variables('serverFarmName')]",
+        "location": "[parameters('location')]",
+        "sku": {
+          "name": "S1",
+          "tier": "Standard"
+        },
+        "kind": "linux"
+      },
+      {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2020-06-01",
+        "name": "[parameters('webAppName')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Web/serverfarms/', variables('serverFarmName'))]"
+        ],
+        "kind": "app",
+        "properties": {
+          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverFarmName'))]",
+          "siteConfig": {
+            "linuxFxVersion": "[concat('DOCKER|', variables('dockerImageName'))]",
+            "appSettings": [
+              {
+                "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                "value": "false"
+              },
+              {
+                "name": "DOCKER_REGISTRY_SERVER_URL",
+                "value": "https://index.docker.io"
+              },
+              {
+                "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                "value": "<Your_Docker_Registry_Username>"
+              },
+              {
+                "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                "value": "<Your_Docker_Registry_Password>"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "outputs": {
+      "webAppUrl": {
+        "type": "string",
+        "value": "[concat('http://', parameters('webAppName'), '.azurewebsites.net')]"
+      }
+    }
+  }
