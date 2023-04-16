@@ -8,7 +8,10 @@
 
 必须拥有Azure OpenAI帐户才能使用 Azure OpenAI Proxy。
 
-## Docker部署
+## Azure部署
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fdeploy%2Fazure-deploy.json)
+## Docker Deployment
 `docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
 ## 本地运行和测试，命令行方式

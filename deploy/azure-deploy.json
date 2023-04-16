@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourcePrefix": {
+      "minLength": 3,
+      "maxLength": 15,
+      "type": "string",
+      "metadata": {
+        "description": "Resource prefix for all the resource provisioned. This should be an alphanumeric string. Note: please keep the `resourcePrefix` short, since some of the Azure resources need the full name to be less than 24 characters. It's recommended that to keep `resource_prefix` less than 15 characters."
+      }
+    }
+  },
+  "variables": {
+    "location": "[resourceGroup().location]",
+    "tenantId": "[subscription().tenantId]",
+    "webAppName": "[concat(parameters('resourcePrefix'),'webapp' )]",
+    "webAppPlanName": "[concat(parameters('resourcePrefix'),'appplan' )]",
+    "webAppPlanSku": "B1",
+    "webAppAPIVersion": "2021-03-01", 
+    "preBuiltdockerImage": "scalaone/azure-openai-proxy:latest"
+  },
+  "functions": [],
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "[variables('webAppAPIVersion')]",
+      "name": "[variables('webAppPlanName')]",
+      "location": "[variables('location')]",
+      "sku": {
+        "name": "[variables('webAppPlanSku')]"
+      },
+      "kind": "linux",
+      "properties": {
+        "reserved": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "[variables('webAppAPIVersion')]",
+      "name": "[variables('webAppName')]",
+      "location": "[variables('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('webAppPlanName'))]"
+      ],
+      "kind": "app,linux,container",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "name": "[variables('webAppName')]",
+        "httpsOnly": "true",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('webAppPlanName'))]",
+        "siteConfig": {
+          "linuxFxVersion": "[concat('DOCKER|', variables('preBuiltdockerImage'))]",
+          "alwaysOn": true,
+          "ftpsState": "Disabled",
+          "appSettings": [
+            {
+              "name": "WEBSITES_PORT",
+              "value": "3000"
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_URL",
+              "value": "https://index.docker.io/v1"
+            },
+            {
+              "name": "DOCKER_ENABLE_CI",
+              "value": "true"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}
