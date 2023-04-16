@@ -45,10 +45,7 @@
       ],
       "kind": "app,linux,container",
       "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]": {}
-        }
+        "type": "SystemAssigned"
       },
       "properties": {
         "name": "[variables('webAppName')]",
