@@ -10,7 +10,7 @@
 
 ## Azure部署
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fazure%2Fdeploy/azuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fazure%2Fdeploy/azure-deploy.json)
 
 ## Docker部署
 `docker run -d -p 3080:3080 scalaone/azure-openai-proxy`
