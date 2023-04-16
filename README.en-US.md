@@ -9,7 +9,7 @@ An Azure OpenAI API proxy tool that can convert OpenAI API requests into Azure O
 You must have an Azure OpenAI account to use the Azure OpenAI Proxy.
 
 ## Docker Deployment
-`docker run -d -p 3080:3080 scalaone/azure-openai-proxy`
+`docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
 ## Local Running and Testing, Command Line Method
 

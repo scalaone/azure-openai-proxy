@@ -9,7 +9,7 @@
 必须拥有Azure OpenAI帐户才能使用 Azure OpenAI Proxy。
 
 ## Docker部署
-`docker run -d -p 3080:3080 scalaone/azure-openai-proxy`
+`docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
 ## 本地运行和测试，命令行方式
 
