@@ -13,7 +13,7 @@
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fazure%2Fdeploy%2Fazure-deploy.json)
 
 ## Docker部署
-`docker run -d -p 3080:3080 scalaone/azure-openai-proxy`
+`docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
 ## 本地运行和测试，命令行方式
 
@@ -21,10 +21,10 @@
 2. 克隆代码到命令行窗口。
 3. 运行 `npm install` 安装依赖项。
 4. 运行 `npm start` 启动应用程序。
-5. 运行下面脚本测试，运行前需要把`YOUR_RESOURCE_ID`，`YOUR_MODEL_DEPLOYMENT`，`YOUR_API_KEY`替换。
+5. 运行下面脚本测试，运行前需要把`YOUR_RESOURCE_ID`，`YOUR_MODEL_DEPLOYMENT`，`YOUR_API_KEY`, `AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，目前默认是2023-03-15-preview。
 ```bash
 curl -X "POST" "http://localhost:3000/v1/chat/completions" \
--H 'Authorization: YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY' \
+-H 'Authorization: YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION' \
 -H 'Content-Type: application/json; charset=utf-8' \
 -d $'{
   "messages": [
@@ -63,7 +63,7 @@ Q: 如何支持GPT-4
 
 A: 要使用GPT-4，请使用下列格式的key: 
 
-`YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
+`YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION`
 
 # 贡献代码方式
 

@@ -9,7 +9,7 @@ An Azure OpenAI API proxy tool that can convert OpenAI API requests into Azure O
 You must have an Azure OpenAI account to use the Azure OpenAI Proxy.
 
 ## Docker Deployment
-`docker run -d -p 3080:3080 scalaone/azure-openai-proxy`
+`docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
 ## Local Running and Testing, Command Line Method
 
@@ -17,10 +17,10 @@ You must have an Azure OpenAI account to use the Azure OpenAI Proxy.
 2. Clone the code in the command line window.
 3. Run `npm install` to install dependencies.
 4. Run `npm start` to start the application.
-5. Run the script below for testing, replacing `YOUR_RESOURCE_ID`, `YOUR_MODEL_DEPLOYMENT`, and `YOUR_API_KEY` before running it.
+5. Run the script below for testing, replacing `YOUR_RESOURCE_ID`, `YOUR_MODEL_DEPLOYMENT`, and `YOUR_API_KEY` before running it, `AZURE_API_VERSION` is optional and the default value is 2023-03-15-preview..
 ```bash
 curl -X "POST" "http://localhost:3000/v1/chat/completions" \
--H 'Authorization: YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY' \
+-H 'Authorization: YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION' \
 -H 'Content-Type: application/json; charset=utf-8' \
 -d $'{
   "messages": [
@@ -59,7 +59,7 @@ Q: How do I support GPT-4？
 
 A: To use GPT-4, please use key format as follows:
 
-`YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
+`YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION`
 
 # How To Contribute Code?
 
