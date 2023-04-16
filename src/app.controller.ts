@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Logger, Post, Req, Res } from '@nestjs/common';
 import { AxiosHeaders } from 'axios';
 import { Request, Response } from 'express';
 import { AppService } from './app.service';
@@ -13,8 +13,11 @@ export class AppController {
   }
 }
 
+const DEFAULT_API_VERSION = '2023-03-15-preview';
+
 @Controller('chat')
 export class ChatController {
+  private readonly logger = new Logger(ChatController.name);
   constructor(private readonly appService: AppService) {}
 
   @Get()
@@ -26,7 +29,10 @@ export class ChatController {
   async completions(@Req() request: Request, @Res() res: Response) {
     const auth = request.headers['authorization'];
     const apiKey = auth.replace('Bearer ', '');
-    const [resource_id, deployment_id, azureApiKey] = apiKey.split(':');
+    const [resource_id, deployment_id, azureApiKey, apiVersion] = apiKey.split(':');
+    this.logger.debug(
+      `resource_id: ${resource_id}, deployment_id: ${deployment_id}, azureApiKey: ${azureApiKey}, apiVersion: ${apiVersion}`,
+    );
     const endpoint = `https://${resource_id}.openai.azure.com`;
     const stream = request.body['stream'];
     const response = await this.appService.getCompletions(
@@ -35,6 +41,7 @@ export class ChatController {
       azureApiKey,
       request.body,
       stream,
+      apiVersion || DEFAULT_API_VERSION,
     );
 
     // set response headers

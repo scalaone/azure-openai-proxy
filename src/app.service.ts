@@ -23,10 +23,11 @@ export class AppService {
     azureApiKey: string,
     body: any,
     stream: boolean,
+    apiVersion: string,
   ) {
     const deployment_id = this.getDeploymentId(mapping, body['model']);
     this.logger.debug(`deployment_id: ${deployment_id}`);
-    const url = `${endpoint}/openai/deployments/${deployment_id}/chat/completions?api-version=2023-03-15-preview`;
+    const url = `${endpoint}/openai/deployments/${deployment_id}/chat/completions?api-version=${apiVersion}`;
     const headers = {
       'api-key': azureApiKey,
       'Content-Type': 'application/json',
@@ -46,14 +47,12 @@ export class AppService {
     this.logger.debug(`mapping: ${mapping}, model: ${model}`);
     if (mapping.includes(',')) {
       let defaultDeploymentId = '';
-      const modelMapping = mapping
-        .split(',')
-        .reduce((acc: Record<string, string>, pair: string) => {
-          const [key, value] = pair.split('|');
-          if (defaultDeploymentId === '') defaultDeploymentId = value;
-          acc[key] = value;
-          return acc;
-        }, {});
+      const modelMapping = mapping.split(',').reduce((acc: Record<string, string>, pair: string) => {
+        const [key, value] = pair.split('|');
+        if (defaultDeploymentId === '') defaultDeploymentId = value;
+        acc[key] = value;
+        return acc;
+      }, {});
       if (!model) {
         return defaultDeploymentId;
       }
