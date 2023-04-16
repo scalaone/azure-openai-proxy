@@ -16,7 +16,7 @@
     "tenantId": "[subscription().tenantId]",
     "webAppName": "[concat(parameters('resourcePrefix'),'webapp' )]",
     "webAppPlanName": "[concat(parameters('resourcePrefix'),'appplan' )]",
-    "webAppPlanSku": "P1v2",
+    "webAppPlanSku": "B1",
     "webAppAPIVersion": "2021-03-01", 
     "preBuiltdockerImage": "scalaone/azure-openai-proxy:latest"
   },
