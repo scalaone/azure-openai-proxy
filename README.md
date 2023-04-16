@@ -10,8 +10,10 @@
 
 ## Azure部署
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fdeploy%2Fazure-deploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fmain%2Fdeploy%2Fazure-deploy.json)
+
 ## Docker Deployment
+
 `docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
 ## 本地运行和测试，命令行方式
@@ -45,12 +47,12 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 ## 本地运行和测试，使用WebChat测试streaming
 
 1. 克隆代码到命令行窗口
-2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量，YOUR_RESOURCE_ID:gpt-35-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY
+2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量，换成`YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
 3. 执行构建：运行 `docker-compose build`
 4. 启动服务：运行 `docker-compose up -d`
 5. 运行`http://localhost:3000`
 
-常见问题
+## 常见问题
 
 Q：什么是`YOUR_RESOURCE_ID`，`YOUR_MODEL_DEPLOYMENT`，`YOUR_API_KEY`
 
