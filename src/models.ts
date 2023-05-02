@@ -1,4 +1,4 @@
-export let models = {
+export const models = {
   object: 'list',
   data: [
     {

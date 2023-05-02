@@ -44,13 +44,24 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 }'
 ```
 
-## Local Running and Testing, Using WebChat for Streaming Test
+## App has been tested
 
-1. Clone code in command line window
-2. Update environment variable of OPENAPI_API_KEY on line nine of `docker-compose.yml` file with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
-3. Execute build: `run docker-compose build`
-4. Start service: `run docker-compose up -d`
-5. Launch `http://localhost:3000`
+The following apps have been tested and confirmed to work with the azure-openai-proxy:
+
+| App Name         | E2E Docker-compose file | 
+|------------------|-------------------------|
+| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
+| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
+| [gptlite](https://github.com/blrchen/gptlite)  | [docker-compose.yml](./e2e/gptlite/docker-compose.yml) |
+
+To run a test locally, please follow these steps:
+
+1. Clone the code in a command-line window.
+2. Update the environment variable `OPENAPI_API_KEY` with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`. Alternatively, you can update the OPENAPI_API_KEY value directly in the docker-compose.yml file.
+3. Navigate to the directory containing the `docker-compose.yml` file for the app you want to test.
+4. Execute the build command: `docker-compose build`.
+5. Start the service: `docker-compose up -d`.
+6. Based on the exposed port defined in the docker-compose.yml file, launch the app to test it locally. For example, visit http://localhost:3000.
 
 ## Frequently Asked Questions
 

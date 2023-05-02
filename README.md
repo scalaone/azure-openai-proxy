@@ -44,13 +44,24 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 }'
 ```
 
-## 本地运行和测试，使用WebChat测试streaming
+## 已测试应用
 
-1. 克隆代码到命令行窗口
-2. 更新 `docker-compose.yml` 文件中第九行的 `OPENAI_API_KEY` 环境变量，换成`YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`
-3. 执行构建：运行 `docker-compose build`
-4. 启动服务：运行 `docker-compose up -d`
-5. 运行`http://localhost:3000`
+以下应用已经过测试，确认可以与 azure-openai-proxy 一起工作：
+
+| App Name         | E2E Docker-compose file | 
+|------------------|-------------------------|
+| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
+| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
+| [gptlite](https://github.com/blrchen/gptlite)  | [docker-compose.yml](./e2e/gptlite/docker-compose.yml) |
+
+要在本地运行测试，请按照以下步骤操作：
+
+1. 在命令行窗口中克隆代码。
+2. 更新环境变量`OPENAPI_API_KEY`的值为`YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`。或者，直接在`docker-compose.yml`文件中更新`OPENAPI_API_KEY`值。
+3. 导航到包含要测试的应用程序的`docker-compose.yml`文件所在的目录。
+3. 执行构建命令：`docker-compose build`。
+4. 启动服务：`docker-compose up -d`。
+5. 根据`docker-compose.yml`文件中定义的公开端口，启动应用以在本地进行测试。例如，访问 http://localhost:3000。
 
 ## 常见问题
 
