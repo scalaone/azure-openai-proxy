@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  chatgpt-web:
+    container_name: chatgpt-web
+    image: chenzhaoyu94/chatgpt-web
+    ports:
+      - 3002:3002
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_BASE_URL: http://azure-openai-proxy:3000
+      # OPENAI_API_MODEL: gpt-4
+      AUTH_SECRET_KEY: ""
+      MAX_REQUEST_PER_HOUR: 1000
+      TIMEOUT_MS: 60000
+    depends_on:
+      - azure-openai-proxy
+    networks:
+      - vnet
+    restart: unless-stopped
+
+  azure-openai-proxy:
+    container_name: azure-openai-proxy
+    build:
+      context: ../..
+    networks:
+      - vnet
+    restart: unless-stopped
+
+networks:
+  vnet:
+    driver: bridge

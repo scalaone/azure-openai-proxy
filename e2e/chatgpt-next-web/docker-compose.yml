@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # ChatGPT Next Web service
+  chatgpt-next-web:
+    container_name: chatgpt-next-web
+    image: yidadaa/chatgpt-next-web:latest
+    ports:
+      - 3000:3000
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - BASE_URL=http://azure-openai-proxy:3000
+    depends_on:
+      - azure-openai-proxy
+    networks:
+      - vnet
+    restart: unless-stopped
+
+  # Azure OpenAI Proxy service
+  azure-openai-proxy:
+    container_name: azure-openai-proxy
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    networks:
+      - vnet
+    restart: unless-stopped
+
+# Networks configuration
+networks:
+  vnet:
+    driver: bridge

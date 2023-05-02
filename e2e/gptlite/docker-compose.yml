@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  gptlite:
+    container_name: gptlite
+    image: blrchen/gptlite:main
+    ports:
+      - 3000:3000
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_BASE_URL: http://azure-openai-proxy:3000
+    depends_on:
+      - azure-openai-proxy
+    networks:
+      - vnet
+    restart: unless-stopped
+
+  azure-openai-proxy:
+    container_name: azure-openai-proxy
+    build:
+      context: ../..
+    networks:
+      - vnet
+    restart: unless-stopped
+
+networks:
+  vnet:
+    driver: bridge
