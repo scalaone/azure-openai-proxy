@@ -46,7 +46,7 @@ export class AppService {
 
   private getDeploymentId(mapping: string, model: string): string {
     this.logger.debug(`mapping: ${mapping}, model: ${model}`);
-    if (mapping.includes(',')) {
+    if (mapping.includes('|')) {
       let defaultDeploymentId = '';
       const modelMapping = mapping.split(',').reduce((acc: Record<string, string>, pair: string) => {
         const [key, value] = pair.split('|');
