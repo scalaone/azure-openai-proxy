@@ -22,10 +22,10 @@
 2. 克隆代码到命令行窗口。
 3. 运行 `npm install` 安装依赖项。
 4. 运行 `npm start` 启动应用程序。
-5. 运行下面脚本测试，运行前需要把`YOUR_RESOURCE_ID`，`YOUR_MODEL_DEPLOYMENT`，`YOUR_API_KEY`, `AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，目前默认是2023-03-15-preview。
+5. 运行下面脚本测试，运行前需要把`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`, `AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，目前默认是`2023-03-15-preview`。
 ```bash
 curl -X "POST" "http://localhost:3000/v1/chat/completions" \
--H 'Authorization: YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION' \
+-H 'Authorization: AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION' \
 -H 'Content-Type: application/json; charset=utf-8' \
 -d $'{
   "messages": [
@@ -51,13 +51,14 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 | App Name         | E2E Docker-compose file | 
 |------------------|-------------------------|
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
+| [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
 | [gptlite](https://github.com/blrchen/gptlite)  | [docker-compose.yml](./e2e/gptlite/docker-compose.yml) |
 
 要在本地运行测试，请按照以下步骤操作：
 
 1. 在命令行窗口中克隆代码。
-2. 更新环境变量`OPENAPI_API_KEY`的值为`YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`。或者，直接在`docker-compose.yml`文件中更新`OPENAPI_API_KEY`值。
+2. 更新环境变量`OPENAPI_API_KEY`的值为`AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY`。或者，直接在`docker-compose.yml`文件中更新`OPENAPI_API_KEY`值。
 3. 导航到包含要测试的应用程序的`docker-compose.yml`文件所在的目录。
 3. 执行构建命令：`docker-compose build`。
 4. 启动服务：`docker-compose up -d`。
@@ -65,7 +66,7 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 
 ## 常见问题
 
-Q：什么是`YOUR_RESOURCE_ID`，`YOUR_MODEL_DEPLOYMENT`，`YOUR_API_KEY`
+Q：什么是`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`
 
 A: 可以在Azure的管理门户里查找，具体见下图标注
 
@@ -75,7 +76,7 @@ Q: 如何支持GPT-4
 
 A: 要使用GPT-4，请使用下列格式的key: 
 
-`YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION`
+`AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
 
 # 贡献代码方式
 
