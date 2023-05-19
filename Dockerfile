@@ -1,35 +1,44 @@
-# Building layer
-FROM node:18-alpine as development
+# This Dockerfile is generated based on sample in the following document
+# https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
+FROM node:18-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy configuration files
-COPY tsconfig*.json ./
-COPY package*.json ./
-
-# Install dependencies from package-lock.json
+# Install dependencies based on the preferred package manager
+COPY package.json package-lock.json* ./
 RUN npm ci
 
-# Copy application sources (.ts, .tsx, js)
-COPY src/ src/
-
-# Build application (produces dist/ folder)
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 RUN npm run build
 
-# Runtime (production) layer
-FROM node:18-alpine as production
+# Production image, copy all the files and run next
+FROM base AS runner
 WORKDIR /app
 
-# Copy dependencies files
-COPY package*.json ./
+ENV NODE_ENV production
 
-# Install runtime dependencies (without dev/test dependencies)
-RUN npm ci --only=production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Copy production build
-COPY --from=development /app/dist/ ./dist/
+COPY --from=builder /app/public ./public
 
-# Expose application port
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
 
-# Start application
-CMD [ "node", "dist/main.js" ]
+ENV PORT 3000
+
+CMD ["node", "server.js"]

@@ -22,10 +22,10 @@ You must have an Azure OpenAI account to use the Azure OpenAI Proxy.
 2. Clone the code in the command line window.
 3. Run `npm install` to install dependencies.
 4. Run `npm start` to start the application.
-5. Run the script below for testing, replacing `YOUR_RESOURCE_ID`, `YOUR_MODEL_DEPLOYMENT`, and `YOUR_API_KEY` before running it, `AZURE_API_VERSION` is optional and the default value is `2023-03-15-preview`.
+5. Run the script below for testing, replacing `AZURE_RESOURCE_ID`, `AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY` before running it, `AZURE_API_VERSION` is optional and the default value is `2023-03-15-preview`.
 ```bash
 curl -X "POST" "http://localhost:3000/v1/chat/completions" \
--H 'Authorization: YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION' \
+-H 'Authorization: AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION' \
 -H 'Content-Type: application/json; charset=utf-8' \
 -d $'{
   "messages": [
@@ -51,13 +51,14 @@ The following apps have been tested and confirmed to work with the azure-openai-
 | App Name         | E2E Docker-compose file | 
 |------------------|-------------------------|
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
+| [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
 | [gptlite](https://github.com/blrchen/gptlite)  | [docker-compose.yml](./e2e/gptlite/docker-compose.yml) |
 
 To run a test locally, please follow these steps:
 
 1. Clone the code in a command-line window.
-2. Update the environment variable `OPENAPI_API_KEY` with `YOUR_RESOURCE_ID:YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY`. Alternatively, you can update the OPENAPI_API_KEY value directly in the docker-compose.yml file.
+2. Update the environment variable `OPENAPI_API_KEY` with `AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY`. Alternatively, you can update the OPENAPI_API_KEY value directly in the docker-compose.yml file.
 3. Navigate to the directory containing the `docker-compose.yml` file for the app you want to test.
 4. Execute the build command: `docker-compose build`.
 5. Start the service: `docker-compose up -d`.
@@ -65,7 +66,7 @@ To run a test locally, please follow these steps:
 
 ## Frequently Asked Questions
 
-Q: What is `YOUR_RESOURCE_ID`,`YOUR_MODEL_DEPLOYMENT`,`YOUR_API_KEY`?
+Q: What is `AZURE_RESOURCE_ID`,`AZURE_MODEL_DEPLOYMENT`,`AZURE_API_KEY`?
 
 A: It can be found in azure management portal, see image below for details:
 
@@ -75,7 +76,7 @@ Q: How do I support GPT-4？
 
 A: To use GPT-4, please use key format as follows:
 
-`YOUR_RESOURCE_ID:gpt-3.5-turbo|YOUR_MODEL_DEPLOYMENT,gpt-4|YOUR_MODEL_DEPLOYMENT,gpt-4-32k|YOUR_MODEL_DEPLOYMENT:YOUR_API_KEY:AZURE_API_VERSION`
+`AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
 
 # How To Contribute Code?
 
