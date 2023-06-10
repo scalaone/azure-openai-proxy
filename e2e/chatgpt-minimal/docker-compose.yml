@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  gptlite:
-    container_name: gptlite
-    image: blrchen/gptlite:main
+  chatgpt-minimal:
+    container_name: chatgpt-minimal
+    image: blrchen/chatgpt-minimal:main
     ports:
       - 3000:3000
     environment:
