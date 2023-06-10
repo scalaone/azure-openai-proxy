@@ -53,7 +53,8 @@ The following apps have been tested and confirmed to work with the azure-openai-
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
-| [gptlite](https://github.com/blrchen/gptlite)  | [docker-compose.yml](./e2e/gptlite/docker-compose.yml) |
+| [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)  | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml) |
+| [chatgpt-mininal](https://github.com/blrchen/chatgpt-mininal)  | [docker-compose.yml](./e2e/chatgpt-mininal/docker-compose.yml) |
 
 To run a test locally, please follow these steps:
 

@@ -53,7 +53,8 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
-| [gptlite](https://github.com/blrchen/gptlite)  | [docker-compose.yml](./e2e/gptlite/docker-compose.yml) |
+| [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)  | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml) |
+| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)  | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml) |
 
 要在本地运行测试，请按照以下步骤操作：
 
