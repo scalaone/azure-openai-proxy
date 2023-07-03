@@ -7,7 +7,7 @@ logger.add(new logger.transports.Console({
   format: logger.format.simple()
 }));
 
-const DEFAULT_API_VERSION = '2023-03-15-preview'
+const DEFAULT_API_VERSION = '2023-05-15'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
