@@ -2,27 +2,35 @@
 
 [English](./README.en-US.md) | Simplified Chinese
 
-An Azure OpenAI API proxy tool that can convert OpenAI API requests into Azure OpenAI API requests, allowing applications that only support OpenAI to seamlessly use Azure Open AI.
+Azure OpenAI Proxy is a tool that transforms OpenAI API requests into Azure OpenAI API requests. This allows applications that are compatible only with OpenAI to use Azure Open AI seamlessly.
 
-## Usage Requirements
+## Prerequisites
 
-You must have an Azure OpenAI account to use the Azure OpenAI Proxy.
+To use Azure OpenAI Proxy, you need an Azure OpenAI account.
 
-## Deploy to Azure
+## Azure Deployment
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fmain%2Fdeploy%2Fazure-deploy.json)
 
 ## Docker Deployment
 
+Run the following command to deploy using Docker:
+
 `docker run -d -p 3000:3000 scalaone/azure-openai-proxy`
 
-## Local Running and Testing, Command Line Method
+## Local Execution and Testing (Command Line)
+
+Follow the steps below:
 
 1. Install NodeJS 18.
-2. Clone the code in the command line window.
-3. Run `npm install` to install dependencies.
+2. Clone the repository in the command line window.
+3. Run `npm install` to install the dependencies.
 4. Run `npm start` to start the application.
-5. Run the script below for testing, replacing `AZURE_RESOURCE_ID`, `AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY` before running it, `AZURE_API_VERSION` is optional and the default value is `2023-03-15-preview`.
+5. Use the script below for testing. Replace `AZURE_RESOURCE_ID`, `AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY` before executing. `AZURE_API_VERSION` is optional, its default value is `2023-05-15`.
+
+<details>
+<summary>Test script</summary>
+
 ```bash
 curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 -H 'Authorization: AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION' \
@@ -44,45 +52,51 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 }'
 ```
 
-## App has been tested
+</details>
 
-The following apps have been tested and confirmed to work with the azure-openai-proxy:
+## Tested Applications
 
-| App Name         | E2E Docker-compose file | 
-|------------------|-------------------------|
+The azure-openai-proxy has been tested and confirmed to work with the following applications:
+
+| Application Name | Docker-compose File |
+|------------------|---------------------|
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
 | [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)  | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml) |
 | [chatgpt-mininal](https://github.com/blrchen/chatgpt-mininal)  | [docker-compose.yml](./e2e/chatgpt-mininal/docker-compose.yml) |
 
-To run a test locally, please follow these steps:
+To test locally, follow these steps:
 
-1. Clone the code in a command-line window.
-2. Update the environment variable `OPENAPI_API_KEY` with `AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY`. Alternatively, you can update the OPENAPI_API_KEY value directly in the docker-compose.yml file.
-3. Navigate to the directory containing the `docker-compose.yml` file for the app you want to test.
-4. Execute the build command: `docker-compose build`.
+1. Clone the repository in a command-line window.
+2. Update the `OPENAPI_API_KEY` environment variable with `AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY`. Alternatively, update the OPENAPI_API_KEY value directly in the docker-compose.yml file.
+3. Navigate to the directory containing the `docker-compose.yml` file for the application you want to test.
+4. Run the build command: `docker-compose build`.
 5. Start the service: `docker-compose up -d`.
-6. Based on the exposed port defined in the docker-compose.yml file, launch the app to test it locally. For example, visit http://localhost:3000.
+6. Launch the application locally using the exposed port defined in the docker-compose.yml file. For example, visit http://localhost:3000.
 
-## Frequently Asked Questions
+## FAQs
 
-Q: What is `AZURE_RESOURCE_ID`,`AZURE_MODEL_DEPLOYMENT`,`AZURE_API_KEY`?
+<details>
+<summary>Q: What are `AZURE_RESOURCE_ID`,`AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY`?
 
-A: It can be found in azure management portal, see image below for details:
+A: You can find these in the Azure management portal. Refer to the image below for details:
 
 ![resource-and-model](./resource-and-model.jpg)
+</details>
 
-Q: How do I support GPT-4？
+<details>
+<summary>Q: How can I use GPT-4?
 
-A: To use GPT-4, please use key format as follows:
+A: To use GPT-4, use the key format as follows:
 
 `AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
+</details>
 
-# How To Contribute Code?
+## Contributing
 
-Welcome to submit various PRs.
+We welcome various PR submissions.
 
-# Disclaimer
+## Disclaimer
 
-This code is for demonstration and testing purposes only.
+This code is intended for demonstration and testing purposes only.
