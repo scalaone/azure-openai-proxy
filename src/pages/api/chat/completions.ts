@@ -3,9 +3,11 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ChatMessage } from '@/pages/api/chat/interface'
 import logger from 'winston'
 
-logger.add(new logger.transports.Console({
-  format: logger.format.simple()
-}));
+logger.add(
+  new logger.transports.Console({
+    format: logger.format.simple()
+  })
+)
 
 const DEFAULT_API_VERSION = '2023-05-15'
 

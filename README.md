@@ -2,13 +2,13 @@
 
 [English](./README.en-US.md) | 简体中文
 
-Azure OpenAI Proxy是一个 OpenAI API 代理工具，它可以将OpenAI API请求转换为Azure OpenAI API请求，使仅支持OpenAI的应用程序可以无缝地使用Azure OpenAI。
+Azure OpenAI Proxy 是一个 OpenAI API 代理工具，它可以将 OpenAI API 请求转换为 Azure OpenAI API 请求，使仅支持 OpenAI 的应用程序可以无缝地使用 Azure OpenAI。
 
 ## 使用要求
 
-必须拥有Azure OpenAI帐户才能使用 Azure OpenAI Proxy。
+必须拥有 Azure OpenAI 帐户才能使用 Azure OpenAI Proxy。
 
-## Azure部署
+## Azure 部署
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fmain%2Fdeploy%2Fazure-deploy.json)
 
@@ -56,13 +56,13 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 
 以下应用已经过测试，确认可以与 azure-openai-proxy 一起工作：
 
-| App Name         | E2E Docker-compose file | 
-|------------------|-------------------------|
-| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
+| App Name                                                        | E2E Docker-compose file                                         |
+| --------------------------------------------------------------- | --------------------------------------------------------------- |
+| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
-| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
-| [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)  | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml) |
-| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)  | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml) |
+| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
+| [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)         | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml)     |
+| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
 
 要在本地运行测试，请按照以下步骤操作：
 
@@ -80,18 +80,20 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 A: 可以在Azure的管理门户里查找，具体见下图标注
 
 ![resource-and-model](./resource-and-model.jpg)
+
 </details>
 
 <details>
 <summary>Q: 如何支持GPT-4</summary>
-A: 要使用GPT-4，请使用下列格式的key: 
+A: 要使用GPT-4，请使用下列格式的key:
 
 `AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
+
 </details>
 
 # 贡献代码方式
 
-欢迎提交各种PR。
+欢迎提交各种 PR。
 
 # 免责声明
 
