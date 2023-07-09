@@ -58,13 +58,13 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 
 The azure-openai-proxy has been tested and confirmed to work with the following applications:
 
-| Application Name | Docker-compose File |
-|------------------|---------------------|
-| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui) | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml) |
+| Application Name                                                | Docker-compose File                                             |
+| --------------------------------------------------------------- | --------------------------------------------------------------- |
+| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
-| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml) |
-| [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)  | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml) |
-| [chatgpt-mininal](https://github.com/blrchen/chatgpt-mininal)  | [docker-compose.yml](./e2e/chatgpt-mininal/docker-compose.yml) |
+| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
+| [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)         | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml)     |
+| [chatgpt-mininal](https://github.com/blrchen/chatgpt-mininal)   | [docker-compose.yml](./e2e/chatgpt-mininal/docker-compose.yml)  |
 
 To test locally, follow these steps:
 
@@ -78,19 +78,21 @@ To test locally, follow these steps:
 ## FAQs
 
 <details>
-<summary>Q: What are `AZURE_RESOURCE_ID`,`AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY`?
+<summary>Q: What are `AZURE_RESOURCE_ID`,`AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY`?</summary>
 
 A: You can find these in the Azure management portal. Refer to the image below for details:
 
 ![resource-and-model](./resource-and-model.jpg)
+
 </details>
 
 <details>
-<summary>Q: How can I use GPT-4?
+<summary>Q: How can I use GPT-4?</summary>
 
 A: To use GPT-4, use the key format as follows:
 
 `AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
+
 </details>
 
 ## Contributing
