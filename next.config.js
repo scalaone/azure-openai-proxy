@@ -1,13 +1,9 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: '/v1/:path*',
-        destination: '/api/:path*'
-      }
-    ]
+  experimental: {
+    appDir: true
   }
 }
 

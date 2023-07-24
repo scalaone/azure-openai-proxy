@@ -2,17 +2,23 @@
 
 [English](./README.en-US.md) | 简体中文
 
-Azure OpenAI Proxy 是一个 OpenAI API 代理工具，它可以将 OpenAI API 请求转换为 Azure OpenAI API 请求，使仅支持 OpenAI 的应用程序可以无缝地使用 Azure OpenAI。
+Azure OpenAI Proxy 是一个 OpenAI API 的代理工具，能将 OpenAI API 请求转为 Azure OpenAI API 请求，从而让只支持 OpenAI 的应用程序无缝使用 Azure OpenAI。
 
-## 使用要求
+## 使用条件
 
-必须拥有 Azure OpenAI 帐户才能使用 Azure OpenAI Proxy。
+你需要有一个 Azure OpenAI 账户才能使用 Azure OpenAI Proxy。
 
 ## Azure 部署
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fmain%2Fdeploy%2Fazure-deploy.json)
 
-## Docker Deployment
+请注意：
+
+- 选择与你的 Azure OpenAI 资源相匹配的区域以获得最佳性能。
+- 如果部署失败是因为 'proxywebapp' 名称已被占用，只需修改资源前缀再重新部署。
+- 已部署的代理应用位于 B1 定价层级的 Azure 网页应用计划下，你可以在部署后在 Azure 门户中进行更新。
+
+## Docker 部署
 
 ```bash
 docker run -d -p 3000:3000 scalaone/azure-openai-proxy
@@ -24,7 +30,7 @@ docker run -d -p 3000:3000 scalaone/azure-openai-proxy
 2. 克隆代码到命令行窗口。
 3. 运行 `npm install` 安装依赖项。
 4. 运行 `npm start` 启动应用程序。
-5. 运行下面脚本测试，运行前需要把`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`, `AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，目前默认是`2023-05-15`。
+5. 运行下面脚本测试，运行前需要把`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`和`AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，默认是`2023-05-15`。
 
 <details>
 <summary>测试脚本</summary>
@@ -56,12 +62,12 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 
 以下应用已经过测试，确认可以与 azure-openai-proxy 一起工作：
 
-| App Name                                                        | E2E Docker-compose file                                         |
+| 应用名称                                                        | E2E测试 Docker-compose 文件                                     |
 | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
-| [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
-| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
 | [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)         | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml)     |
+| [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
+| [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
+| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
 | [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
 
 要在本地运行测试，请按照以下步骤操作：
@@ -84,8 +90,8 @@ A: 可以在Azure的管理门户里查找，具体见下图标注
 </details>
 
 <details>
-<summary>Q: 如何支持GPT-4</summary>
-A: 要使用GPT-4，请使用下列格式的key:
+<summary>Q: 如何使用gpt-4 and gpt-4-32k模型</summary>
+A: 要使用gpt-4 and gpt-4-32k模型，请使用下列格式的key:
 
 `AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
 
