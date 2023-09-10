@@ -1,40 +1,43 @@
 # Azure OpenAI Proxy
 
-[English](./README.en-US.md) | 简体中文
+English | [简体中文](./README.zh-CN.md)
 
-Azure OpenAI Proxy 是一个 OpenAI API 的代理工具，能将 OpenAI API 请求转为 Azure OpenAI API 请求，从而让只支持 OpenAI 的应用程序无缝使用 Azure OpenAI。
+Azure OpenAI Proxy is a tool that transforms OpenAI API requests into Azure OpenAI API requests, allowing OpenAI-compatible applications to seamlessly use Azure Open AI.
 
-## 使用条件
+## Prerequisites
 
-你需要有一个 Azure OpenAI 账户才能使用 Azure OpenAI Proxy。
+An Azure OpenAI account is required to use Azure OpenAI Proxy.
 
-## Azure 部署
+## Azure Deployment
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fscalaone%2Fazure-openai-proxy%2Fmain%2Fdeploy%2Fazure-deploy.json)
 
-请注意：
+Remember to:
 
-- 选择与你的 Azure OpenAI 资源相匹配的区域以获得最佳性能。
-- 如果部署失败是因为 'proxywebapp' 名称已被占用，只需修改资源前缀再重新部署。
-- 已部署的代理应用位于 B1 定价层级的 Azure 网页应用计划下，你可以在部署后在 Azure 门户中进行更新。
+- Select the region that matches your Azure OpenAI resource for best performance.
+- If deployment fails because the 'proxywebapp' name is already taken, change the resource prefix and redeploy.
+- The deployed proxy app is part of a B1 pricing tier Azure web app plan, which can be modified in the Azure Portal after deployment.
 
-## Docker 部署
+## Docker Deployment
+
+To deploy using Docker, execute the following command:
 
 ```bash
 docker run -d -p 3000:3000 scalaone/azure-openai-proxy
 ```
 
-## 本地运行和测试，命令行方式
+## Local Execution and Testing
 
-1. 安装 NodeJS 18。
-2. 克隆代码到命令行窗口。
-3. 运行 `npm install` 安装依赖项。
-4. 运行 `npm start` 启动应用程序。
-5. 运行下面脚本测试，运行前需要把`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`和`AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，默认是`2023-05-15`。
+Follow these steps:
+
+1. Install NodeJS 18.
+2. Clone the repository in the command line window.
+3. Run `npm install` to install the dependencies.
+4. Run `npm start` to start the application.
+5. Use the script below for testing. Replace `AZURE_RESOURCE_ID`, `AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY` before running. The default value for `AZURE_API_VERSION` is `2023-05-15` and is optional.
 
 <details>
-<summary>测试脚本</summary>
-
+<summary>Test script</summary>
 ```bash
 curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 -H 'Authorization: AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION' \
@@ -55,14 +58,13 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
   "stream": false
 }'
 ```
-
 </details>
 
-## 已测试应用
+## Tested Applications
 
-以下应用已经过测试，确认可以与 azure-openai-proxy 一起工作：
+The azure-openai-proxy has been tested and confirmed to work with the following applications:
 
-| 应用名称                                                        | E2E测试 Docker-compose 文件                                     |
+| Application Name                                                | Docker-compose File for E2E Test                                |
 | --------------------------------------------------------------- | --------------------------------------------------------------- |
 | [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)         | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml)     |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
@@ -70,37 +72,28 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
 | [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
 
-要在本地运行测试，请按照以下步骤操作：
+To test locally, follow these steps:
 
-1. 在命令行窗口中克隆代码。
-2. 更新环境变量`OPENAPI_API_KEY`的值为`AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY`。或者，直接在`docker-compose.yml`文件中更新`OPENAPI_API_KEY`值。
-3. 导航到包含要测试的应用程序的`docker-compose.yml`文件所在的目录。
-4. 执行构建命令：`docker-compose build`。
-5. 启动服务：`docker-compose up -d`。
-6. 根据`docker-compose.yml`文件中定义的公开端口，启动应用以在本地进行测试。例如，访问 http://localhost:3000。
+1. Clone the repository in a command-line window.
+2. Update the `OPENAI_API_KEY` environment variable with `AZURE_RESOURCE_ID:AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY`. Alternatively, update the OPENAI_API_KEY value in the docker-compose.yml file directly.
+3. Navigate to the directory containing the `docker-compose.yml` file for the application you want to test.
+4. Execute the build command: `docker-compose build`.
+5. Start the service: `docker-compose up -d`.
+6. Access the application locally using the port defined in the docker-compose.yml file. For example, visit http://localhost:3000.
 
-## 常见问题
+## FAQs
 
 <details>
-<summary>Q：什么是`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`</summary>
-A: 可以在Azure的管理门户里查找，具体见下图标注
-
-![resource-and-model](./resource-and-model.jpg)
-
+<summary>Q: What are `AZURE_RESOURCE_ID`,`AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY`?</summary>
+A: These can be found in the Azure management portal. See the image below for reference:
+![resource-and-model](./docs/images/resource-and-model.jpg)
 </details>
-
 <details>
-<summary>Q: 如何使用gpt-4 and gpt-4-32k模型</summary>
-A: 要使用gpt-4 and gpt-4-32k模型，请使用下列格式的key:
-
+<summary>Q: How can I use gpt-4 and gpt-4-32k models?</summary>
+A: To use gpt-4 and gpt-4-32k models, follow the key format below:
 `AZURE_RESOURCE_ID:gpt-3.5-turbo|AZURE_MODEL_DEPLOYMENT,gpt-4|AZURE_MODEL_DEPLOYMENT,gpt-4-32k|AZURE_MODEL_DEPLOYMENT:AZURE_API_KEY:AZURE_API_VERSION`
-
 </details>
 
-# 贡献代码方式
+## Contributing
 
-欢迎提交各种 PR。
-
-# 免责声明
-
-此代码仅供演示和测试目的。
+We welcome all PR submissions.
