@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   while (true) {
     let response = await chat(apiKey, body)
     const status = response.status
-    if (status < 300 || status === 400) {
+    if (status < 300 || (status >= 400 && status < 500)) {
       return response
     }
     if (retryCount >= MAX_RETRY_COUNT) {

@@ -10,13 +10,13 @@
     "format": "prettier --write '**/*.{ts,tsx,js,html,css,md}'"
   },
   "dependencies": {
-    "@types/node": "20.4.4",
-    "@types/react": "18.2.15",
+    "@types/node": "20.6.1",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "next": "13.4.12",
+    "next": "13.4.19",
     "prettier": "^3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   }
 }
