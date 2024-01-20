@@ -67,7 +67,7 @@ async function chat(apiKey: string, body: any) {
             if (done) {
               controller.close()
             }
-            let data = decoder.decode(value)
+            let data = decoder.decode(value, { stream: true })
             if (isFirstEventData) {
               isFirstEventData = false
               if (shouldRetry(data)) {
