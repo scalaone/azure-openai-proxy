@@ -17,7 +17,7 @@
     "webAppName": "[concat(parameters('resourcePrefix'),'webapp' )]",
     "webAppPlanName": "[concat(parameters('resourcePrefix'),'appplan' )]",
     "webAppPlanSku": "B1",
-    "webAppAPIVersion": "2021-03-01", 
+    "webAppAPIVersion": "2021-03-01",
     "preBuiltdockerImage": "scalaone/azure-openai-proxy:latest"
   },
   "functions": [],
@@ -40,9 +40,7 @@
       "apiVersion": "[variables('webAppAPIVersion')]",
       "name": "[variables('webAppName')]",
       "location": "[variables('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('webAppPlanName'))]"
-      ],
+      "dependsOn": ["[resourceId('Microsoft.Web/serverfarms', variables('webAppPlanName'))]"],
       "kind": "app,linux,container",
       "identity": {
         "type": "SystemAssigned"

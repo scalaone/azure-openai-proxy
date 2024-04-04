@@ -30,11 +30,11 @@ docker run -d -p 3000:3000 scalaone/azure-openai-proxy
 
 遵循以下步骤：
 
-1. 安装 NodeJS 18。
+1. 安装 NodeJS 20。
 2. 克隆代码到命令行窗口。
 3. 运行 `npm install` 安装依赖项。
 4. 运行 `npm start` 启动应用程序。
-5. 运行下面脚本测试，运行前需要把`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`和`AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，默认是`2023-05-15`。
+5. 运行下面脚本测试，运行前需要把`AZURE_RESOURCE_ID`，`AZURE_MODEL_DEPLOYMENT`，`AZURE_API_KEY`和`AZURE_API_VERSION`替换，`AZURE_API_VERSION`参数可选，默认是`2024-02-01`。
 
 <details>
 <summary>测试脚本</summary>
@@ -67,10 +67,10 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 | 应用名称                                                        | E2E测试 Docker-compose 文件                                     |
 | --------------------------------------------------------------- | --------------------------------------------------------------- |
 | [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)         | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml)     |
+| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
-| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
 
 要在本地运行测试，请按照以下步骤操作：
 

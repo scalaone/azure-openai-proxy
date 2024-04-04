@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const DEFAULT_API_VERSION = '2023-05-15'
+const DEFAULT_API_VERSION = '2024-02-01'
 const MAX_RETRY_COUNT = 3
 const RETRY_DELAY = 1000
 
@@ -13,18 +13,15 @@ export async function POST(request: NextRequest) {
 
   let retryCount = 0
   while (true) {
-    let response = await chat(apiKey, body)
+    const response = await chat(apiKey, body)
     const status = response.status
-    if (status < 300 || (status >= 400 && status < 500)) {
+    if (status < 300 || (status >= 400 && status < 500) || retryCount >= MAX_RETRY_COUNT) {
       return response
     }
-    if (retryCount >= MAX_RETRY_COUNT) {
-      return response
-    } else {
-      retryCount++
-      console.log(`Status is ${status}, Retry ${retryCount} times`)
-      await delay(RETRY_DELAY)
-    }
+
+    retryCount++
+    console.log(`Status is ${status}, Retry ${retryCount} times`)
+    await delay(RETRY_DELAY)
   }
 }
 
@@ -32,7 +29,6 @@ async function chat(apiKey: string, body: any) {
   const [resourceId, mapping, azureApiKey, apiVersion] = apiKey.split(':')
   const model = body['model']
 
-  // get deployment id
   let deploymentId
   if (mapping.includes('|')) {
     const modelMapping = Object.fromEntries(mapping.split(',').map((pair) => pair.split('|')))

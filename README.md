@@ -30,11 +30,11 @@ docker run -d -p 3000:3000 scalaone/azure-openai-proxy
 
 Follow these steps:
 
-1. Install NodeJS 18.
+1. Install NodeJS 20.
 2. Clone the repository in the command line window.
 3. Run `npm install` to install the dependencies.
 4. Run `npm start` to start the application.
-5. Use the script below for testing. Replace `AZURE_RESOURCE_ID`, `AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY` before running. The default value for `AZURE_API_VERSION` is `2023-05-15` and is optional.
+5. Use the script below for testing. Replace `AZURE_RESOURCE_ID`, `AZURE_MODEL_DEPLOYMENT`, and `AZURE_API_KEY` before running. The default value for `AZURE_API_VERSION` is `2024-02-01` and is optional.
 
 <details>
 <summary>Test script</summary>
@@ -67,10 +67,11 @@ The azure-openai-proxy has been tested and confirmed to work with the following 
 | Application Name                                                | Docker-compose File for E2E Test                                |
 | --------------------------------------------------------------- | --------------------------------------------------------------- |
 | [chatgpt-lite](https://github.com/blrchen/chatgpt-lite)         | [docker-compose.yml](./e2e/chatgpt-lite/docker-compose.yml)     |
+| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | [docker-compose.yml](./e2e/chatgpt-next-web/docker-compose.yml) |
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
-| [chatgpt-minimal](https://github.com/blrchen/chatgpt-minimal)   | [docker-compose.yml](./e2e/chatgpt-minimal/docker-compose.yml)  |
+
 
 To test locally, follow these steps:
 

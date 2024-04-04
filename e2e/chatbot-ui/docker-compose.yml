@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # ChatGPT UI application
   chatbot-ui:
     container_name: chatbot-ui
     image: ghcr.io/mckaywrigley/chatbot-ui:main
@@ -15,6 +16,7 @@ services:
       - vnet
     restart: unless-stopped
 
+  # Azure OpenAI Proxy service
   azure-openai-proxy:
     container_name: azure-openai-proxy
     build:

@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # ChatGPT UI application
   chatgpt-lite:
     container_name: chatgpt-lite
     image: blrchen/chatgpt-lite:main
@@ -15,6 +16,7 @@ services:
       - vnet
     restart: unless-stopped
 
+  # Azure OpenAI Proxy service
   azure-openai-proxy:
     container_name: azure-openai-proxy
     build:

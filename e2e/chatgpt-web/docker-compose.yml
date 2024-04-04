@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # ChatGPT UI application
   chatgpt-web:
     container_name: chatgpt-web
     image: chenzhaoyu94/chatgpt-web
@@ -19,6 +20,7 @@ services:
       - vnet
     restart: unless-stopped
 
+  # Azure OpenAI Proxy service
   azure-openai-proxy:
     container_name: azure-openai-proxy
     build:
