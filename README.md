@@ -72,7 +72,6 @@ The azure-openai-proxy has been tested and confirmed to work with the following 
 | [chatbot-ui](https://github.com/mckaywrigley/chatbot-ui)        | [docker-compose.yml](./e2e/chatbot-ui/docker-compose.yml)       |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)        | [docker-compose.yml](./e2e/chatgpt-web/docker-compose.yml)      |
 
-
 To test locally, follow these steps:
 
 1. Clone the repository in a command-line window.
@@ -80,7 +79,7 @@ To test locally, follow these steps:
 3. Navigate to the directory containing the `docker-compose.yml` file for the application you want to test.
 4. Execute the build command: `docker-compose build`.
 5. Start the service: `docker-compose up -d`.
-6. Access the application locally using the port defined in the docker-compose.yml file. For example, visit http://localhost:3000.
+6. Access the application locally using the port defined in the docker-compose.yml file. For example, visit <http://localhost:3000>.
 
 ## FAQs
 

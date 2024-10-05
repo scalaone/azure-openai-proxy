@@ -79,7 +79,7 @@ curl -X "POST" "http://localhost:3000/v1/chat/completions" \
 3. 导航到包含要测试的应用程序的`docker-compose.yml`文件所在的目录。
 4. 执行构建命令：`docker-compose build`。
 5. 启动服务：`docker-compose up -d`。
-6. 根据`docker-compose.yml`文件中定义的公开端口，启动应用以在本地进行测试。例如，访问 http://localhost:3000。
+6. 根据`docker-compose.yml`文件中定义的公开端口，启动应用以在本地进行测试。例如，访问 <http://localhost:3000>。
 
 ## 常见问题
 

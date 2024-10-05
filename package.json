@@ -10,7 +10,7 @@
     "format": "prettier --write '**/*.{ts,tsx,js,json,md}'"
   },
   "dependencies": {
-    "next": "^14.1.0",
+    "next": "^14.2.0",
     "react": "^18",
     "react-dom": "^18"
   },
